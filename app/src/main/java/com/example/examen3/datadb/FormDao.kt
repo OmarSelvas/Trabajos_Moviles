@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow // 1. Asegúrate de importar Flow
 
 @Dao
 interface FormDao {
@@ -11,7 +12,8 @@ interface FormDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFormData(data: FormEntity)
 
+    @Query("SELECT * FROM formulario_data ORDER BY id DESC")
+    fun getAllFormData(): Flow<List<FormEntity>>
 
-    @Query("SELECT * FROM formulario_data WHERE id = 1")
-    suspend fun getFormData(): FormEntity?
+
 }

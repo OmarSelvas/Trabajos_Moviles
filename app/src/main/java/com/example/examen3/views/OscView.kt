@@ -1,6 +1,11 @@
 package com.example.examen3.views
 
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -45,26 +50,32 @@ fun OscView(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = if (isDarkMode) "Tema actual: Oscuro" else "Tema actual: Claro",
-                style = MaterialTheme.typography.titleMedium
-            )
+            Crossfade(targetState = isDarkMode, label = "themeText", animationSpec = tween(500)) { isDark ->
+                Text(
+                    text = if (isDark) "Tema actual: Oscuro" else "Tema actual: Claro",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(
-                onClick = {
+            Spacer(modifier = Modifier.height(24.dp))
+            Switch(
+                checked = isDarkMode,
+                onCheckedChange = {
                     scope.launch {
                         context.dataStore.edit { prefs ->
-                            prefs[darkModeKey] = !isDarkMode
+                            prefs[darkModeKey] = it
                         }
                     }
                 },
-                modifier = Modifier.fillMaxWidth(0.8f) // Opcional: ajusta el ancho como en HomeView
-            ) {
-                Text(if (isDarkMode) "Cambiar a Claro" else "Cambiar a Oscuro")
-            }
-
+                thumbContent = {
+                    Icon(
+                        imageVector = if (isDarkMode) Icons.Filled.DarkMode else Icons.Filled.LightMode,
+                        contentDescription = "Icono de tema",
+                        modifier = Modifier.size(SwitchDefaults.IconSize),
+                    )
+                }
+            )
         }
     }
 }
