@@ -64,6 +64,8 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation("nl.dionsegijn:konfetti-compose:2.0.4")
+
 
     val room_version = "2.8.3"
 

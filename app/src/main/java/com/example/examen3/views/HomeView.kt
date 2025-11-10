@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.examen3.components.CustomFloatingActionButton
-import com.example.examen3.components.CustomIconButton
 import com.example.examen3.components.CustomOutlinedButton
 import com.example.examen3.components.NormalButton
 import com.example.examen3.components.pressClickEffect
