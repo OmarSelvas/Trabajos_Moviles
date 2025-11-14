@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -52,6 +53,9 @@ fun Content(innerPaddingValues: PaddingValues, navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Button(onClick = { navController.navigate("GestionAlumnos") }) {
+            Text("Gestionar Alumnos")
+        }
         NormalButton(
             title = "¿Deseas ir al formulario?",
             modifier = Modifier.pressClickEffect(),
